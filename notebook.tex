@@ -1,0 +1,1361 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{bootcamp\_2?? ??}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{2주차 부트 캠프}\label{uxc8fcuxcc28-uxbd80uxd2b8-uxcea0uxd504}
+
+    \subsection{1. Epsilon}\label{epsilon}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+        
+        \PY{c+c1}{\PYZsh{} 64bit 컴퓨터에서 정확히 표현 가능한 자릿수 확인}
+        \PY{n}{sys}\PY{o}{.}\PY{n}{float\PYZus{}info}\PY{o}{.}\PY{n}{dig}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} 15
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{num} \PY{o}{=} \PY{l+m+mf}{2.0}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{53}
+        \PY{n}{num}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} 9007199254740992.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} num는 16자리 숫자. 즉, 마지막 숫자는 불확실함.}
+        \PY{c+c1}{\PYZsh{} 64bit 컴퓨터는 15자리까지 숫자의 정확성을 보장받음}
+        \PY{c+c1}{\PYZsh{} 이는 실수 구현 당시 속도를 택하고 정확도를 버린 결과}
+        \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} 16
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} 2진수 53자리까지 완벽하게 표현이 가능}
+        \PY{c+c1}{\PYZsh{} 10진수는 15자리까지 완벽하게 표현이 가능}
+        \PY{c+c1}{\PYZsh{} 1.0을 십진수로 표현하고 싶다!!}
+        \PY{c+c1}{\PYZsh{} 1.000000000000.......0\PYZus{}(2) * 2\PYZca{}0 \PYZhy{}\PYZgt{} 1.0 \PYZsh{} representable number}
+        \PY{c+c1}{\PYZsh{} 이 다음에 표현할 수 있는 수는?}
+        \PY{c+c1}{\PYZsh{} 1.000000000000.......1\PYZus{}(2) * 2\PYZca{}0}
+        \PY{c+c1}{\PYZsh{} 위의 두 수 사이의 차이 == epsilon}
+        
+        \PY{c+c1}{\PYZsh{} sys module에서 epsilon 받아오기}
+        \PY{n}{ep} \PY{o}{=} \PY{n}{sys}\PY{o}{.}\PY{n}{float\PYZus{}info}\PY{o}{.}\PY{n}{epsilon}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{epsilon : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{ep}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{this number means, 2.220...*10\PYZca{}\PYZhy{}16}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+epsilon : 2.220446049250313e-16
+this number means, 2.220{\ldots}*10\^{}-16
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} 64bit에서 11개의 exp term, 부호 표시 1개 제외 52자리 표현가능}
+        \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{o}{\PYZhy{}}\PY{l+m+mi}{52}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} 2.220446049250313e-16
+\end{Verbatim}
+            
+    \subsection{absolute comparison}\label{absolute-comparison}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{*} \PY{l+m+mi}{3}
+        \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{0.3}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} 육안으로 보면 같은 결과.}
+        \PY{c+c1}{\PYZsh{} 하지만 결과는?}
+        \PY{n}{a}\PY{o}{==}\PY{n}{b}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} False
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{a}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} 0.30000000000000004
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{b}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 0.3
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} for 게임 개발하시는 분들의 입장,}
+         \PY{c+c1}{\PYZsh{} 실수 쓸 때 == 쓰지마라!}
+         \PY{c+c1}{\PYZsh{} 무조건 \PYZgt{}=, \PYZlt{}=}
+         \PY{c+c1}{\PYZsh{} 게임에서는 double은 안쓰고 float를 씀}
+         \PY{c+c1}{\PYZsh{} 실수가 같은지 비교해야할 상황이 온다면 어떻게 해결할 것인가?}
+         
+         \PY{c+c1}{\PYZsh{} data science, coding}
+         \PY{k}{if} \PY{n}{a}\PY{o}{==}\PY{n}{b}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{thing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fantastic baby}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+fantastic baby
+
+    \end{Verbatim}
+
+    \subsection{절대 비교}\label{uxc808uxb300-uxbe44uxad50}
+
+\paragraph{absolute comparison}\label{absolute-comparison}
+
+\begin{itemize}
+\tightlist
+\item
+  interface
+\item
+  is\_equal(a,b) -\textgreater{} boolean
+\item
+  a와 b의 차이를 절대값으로 만듦
+\item
+  이 값 1e-10 \textgreater{}\textgreater{} 1*10\^{}-10
+\item
+  diff \textless{} upper than True
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a\PYZhy{}b is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{epsilon is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{ep}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a-b is 5.551115123125783e-17 
+epsilon is 2.220446049250313e-16
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{ep} \PY{o}{\PYZgt{}} \PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} True
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} 다음과 같은 표현으로도 python은 숫자 표현이 가능하다!}
+         \PY{n}{c} \PY{o}{=} \PY{l+m+mf}{1e10}
+         \PY{n}{c}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 10000000000.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{n}{fabs}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{abs(a\PYZhy{}b) is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fabs(a\PYZhy{}b) is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is this same? : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}\PY{o}{==}\PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+abs(a-b) is 5.551115123125783e-17
+fabs(a-b) is 5.551115123125783e-17
+is this same? : True
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Since 절대비교, 특정한 값과 비교}
+         \PY{k}{def} \PY{n+nf}{is\PYZus{}equal\PYZus{}by\PYZus{}absolute}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}10}
+         
+         \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{*} \PY{l+m+mi}{3}
+         \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{0.3}
+         \PY{k}{if} \PY{n}{a}\PY{o}{==}\PY{n}{b}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wow}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{elif} \PY{n}{is\PYZus{}equal\PYZus{}by\PYZus{}absolute}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Great}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{no}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Great
+
+    \end{Verbatim}
+
+    \subsection{Relative comparison(상대
+비교)}\label{relative-comparisonuxc0c1uxb300-uxbe44uxad50}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} 값을 고정시켜 놓으면 일반화시킬 수 없다}
+         \PY{c+c1}{\PYZsh{} 즉, 두 실수의 scale로 조정하여 변화율을 측정,}
+         \PY{c+c1}{\PYZsh{} 들어오는 input value에 맞춰서 error rate를 측정한다.}
+         
+         \PY{k}{def} \PY{n+nf}{is\PYZus{}equal\PYZus{}by\PYZus{}relative}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n}{diff} \PY{o}{=} \PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}
+             \PY{n}{maximal} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{,}\PY{n}{fabs}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+             \PY{n}{rel\PYZus{}error} \PY{o}{=} \PY{n}{diff} \PY{o}{/} \PY{n}{maximal}
+             \PY{k}{return} \PY{n}{rel\PYZus{}error} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}8}
+         
+         \PY{k}{if} \PY{n}{is\PYZus{}equal\PYZus{}by\PYZus{}relative}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Great}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Great
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} 다음은 절대 참조와 상대 참조 모두를 활용하는 함수이다.}
+         
+         \PY{k}{def} \PY{n+nf}{is\PYZus{}equal}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n}{diff} \PY{o}{=} \PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}
+             \PY{n}{rel\PYZus{}error} \PY{o}{=} \PY{n}{diff} \PY{o}{/} \PY{n+nb}{max}\PY{p}{(}\PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{,}\PY{n}{fabs}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+             \PY{k}{if} \PY{n}{diff} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}10}\PY{p}{:}
+                 \PY{n}{result} \PY{o}{=} \PY{k+kc}{True}
+             \PY{k}{elif} \PY{n}{rel\PYZus{}error} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{:}
+                 \PY{n}{result} \PY{o}{=} \PY{k+kc}{True}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{result} \PY{o}{=} \PY{k+kc}{False}
+             \PY{k}{return} \PY{n}{result}
+         
+         \PY{k}{if} \PY{n}{is\PYZus{}equal}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{thing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+thing
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} is\PYZus{}equal함수의 다른 표현 방법이다.}
+         
+         \PY{k}{def} \PY{n+nf}{is\PYZus{}equal2}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n}{diff} \PY{o}{=} \PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}
+             \PY{n}{rel\PYZus{}error} \PY{o}{=} \PY{n}{diff} \PY{o}{/} \PY{n+nb}{max}\PY{p}{(}\PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{,}\PY{n}{fabs}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+             \PY{k}{if} \PY{n}{diff} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}10}\PY{p}{:}
+                 \PY{k}{return} \PY{k+kc}{True}
+             \PY{k}{return} \PY{n}{rel\PYZus{}error} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}8}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} 위의 is\PYZus{}equal함수에서 상수를 ep으로 활용한 함수이다.}
+         
+         \PY{k}{def} \PY{n+nf}{is\PYZus{}equal\PYZus{}by\PYZus{}epsilon}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ep} \PY{o}{=} \PY{n}{sys}\PY{o}{.}\PY{n}{float\PYZus{}info}\PY{o}{.}\PY{n}{epsilon}
+             \PY{n}{diff} \PY{o}{=} \PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}
+             \PY{n}{rel\PYZus{}error} \PY{o}{=} \PY{n}{diff} \PY{o}{/} \PY{n+nb}{max}\PY{p}{(}\PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{,}\PY{n}{fabs}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+             \PY{k}{if} \PY{n}{diff} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{ep}\PY{p}{:}
+                 \PY{k}{return} \PY{k+kc}{True}
+             \PY{k}{return} \PY{n}{rel\PYZus{}error} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{ep}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} 단순하게 epsilon이랑 비교할 경우, 다음과 같은 문제점이 발생할 수 있다.}
+         
+         \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{0.01}
+         \PY{n}{s} \PY{o}{=} \PY{l+m+mf}{0.0}
+         \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{s}\PY{o}{+}\PY{o}{=}\PY{n}{a}
+         \PY{n}{s}
+         \PY{c+c1}{\PYZsh{} 우리가 기대하기로, s는 1이 되어야 할 것인데,}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 1.0000000000000007
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{t} \PY{o}{=} \PY{l+m+mf}{1.0}
+         \PY{n}{is\PYZus{}equal\PYZus{}by\PYZus{}epsilon}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{s}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 우리가 제작한 함수로는 위 두 수를 \PYZdq{}같다\PYZdq{}라고 표현할 수가 없다.}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} False
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} 즉, 가중치를 두어 우리가 조절할 수 있게 만들자!}
+         
+         \PY{k}{def} \PY{n+nf}{is\PYZus{}equal\PYZus{}by\PYZus{}epsilon\PYZus{}weighted}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{,} \PY{n}{w}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ep} \PY{o}{=} \PY{n}{sys}\PY{o}{.}\PY{n}{float\PYZus{}info}\PY{o}{.}\PY{n}{epsilon}
+             \PY{n}{diff} \PY{o}{=} \PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}
+             \PY{n}{rel\PYZus{}error} \PY{o}{=} \PY{n}{diff} \PY{o}{/} \PY{n+nb}{max}\PY{p}{(}\PY{n}{fabs}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{,}\PY{n}{fabs}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}if diff \PYZlt{}= ep:}
+             \PY{c+c1}{\PYZsh{}    return True}
+             \PY{k}{return} \PY{n}{rel\PYZus{}error} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{ep}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{n}{w}\PY{p}{)}
+         
+         \PY{k}{if} \PY{n}{is\PYZus{}equal\PYZus{}by\PYZus{}epsilon\PYZus{}weighted}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{s}\PY{p}{,}\PY{n}{w}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{thing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+thing
+
+    \end{Verbatim}
+
+    \subsection{2. Firstclass\_function}\label{firstclass_function}
+
+\begin{itemize}
+\tightlist
+\item
+  함수를
+\item
+  첫째, argument (인자)로 전달할 수 있는가
+\item
+  둘째, variable (변수)로 전달할 수 있는가
+\item
+  셋째, return (반환값)으로 함수를 사용할 수 있는가
+\item
+  위의 세 조건을 만족하는 언어를 Firstclass\_function을 만족한다고 한다.
+\item
+  python은 이것을 지원하는 언어
+\item
+  c언어는 포인터를 넘겨서 사용
+\item
+  js는 지원을 함
+\end{itemize}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  argument
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{a}\PY{o}{+}\PY{n}{b}
+         
+         \PY{c+c1}{\PYZsh{} 함수를 argument로 calling}
+         \PY{c+c1}{\PYZsh{} 이게 먹힌다는 얘기는 함수를 인자로 전달할 수 있다는 얘기}
+         \PY{k}{def} \PY{n+nf}{g}\PY{p}{(}\PY{n}{func}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{func}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)} 
+         
+         \PY{c+c1}{\PYZsh{} 보는 바와 같이 잘 먹힌다.}
+         \PY{n}{g}\PY{p}{(}\PY{n}{f}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 3
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  variable
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{f\PYZus{}var} \PY{o}{=} \PY{n}{f}
+         \PY{n}{f\PYZus{}var}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)} \PY{c+c1}{\PYZsh{} 함수를 변수에 저장할 수 있다.}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} 3
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  return
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{def} \PY{n+nf}{calc}\PY{p}{(}\PY{n}{kind}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{kind} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{add}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{k}{def} \PY{n+nf}{add}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{a}\PY{o}{+}\PY{n}{b}
+                 \PY{k}{return} \PY{n}{add}
+             \PY{k}{elif} \PY{n}{kind} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{subtract}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{k}{def} \PY{n+nf}{subtract}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}
+                 \PY{k}{return} \PY{n}{subtract}
+             
+         \PY{n}{adder} \PY{o}{=} \PY{n}{calc}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{add}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 함수를 return값으로 받는 것이 가능하다.}
+         \PY{n+nb}{type}\PY{p}{(}\PY{n}{adder}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} function
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{adder}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} 3
+\end{Verbatim}
+            
+    \subsection{3. Stackframe}\label{stackframe}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} 파이썬 특화}
+         \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{} 전역 변수}
+         \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{20} \PY{c+c1}{\PYZsh{} 함수 내에 선언된 변수 : 지역 변수}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{함수 내에서 선언된 a :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{a}\PY{p}{)}
+         \PY{n}{func}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{함수 밖에서 선언된 a :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+함수 내에서 선언된 a : 20
+함수 밖에서 선언된 a : 10
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} 파이썬 특화}
+         \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{global} \PY{n}{a}
+             \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{20}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{함수 내에서 선언된 a :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{a}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{} 위의 다른 것을 해결하기 위해선 global을 선언해주면 된다.}
+         \PY{n}{func}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{함수 밖에서 선언된 a :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+함수 내에서 선언된 a : 20
+함수 밖에서 선언된 a : 20
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Nonlocal
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{k}{def} \PY{n+nf}{outer}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{20} \PY{c+c1}{\PYZsh{} in python, free variable for inner}
+             \PY{k}{def} \PY{n+nf}{inner}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{45}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ in inner}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+             \PY{n}{inner}\PY{p}{(}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ in outer}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+         \PY{n}{outer}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} outer의 b는 global도 아니고 local도 아니고... 도대체 무엇일까?}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+45 in inner
+20 in outer
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{k}{def} \PY{n+nf}{outer}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{20} \PY{c+c1}{\PYZsh{} in python, free variable for inner}
+             \PY{k}{def} \PY{n+nf}{inner}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{nonlocal} \PY{n}{b}
+                 \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{45}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ in inner}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+             \PY{n}{inner}\PY{p}{(}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ in outer}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+         \PY{n}{outer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+45 in inner
+45 in outer
+
+    \end{Verbatim}
+
+    \subsubsection{다시 제대로
+StackFrame}\label{uxb2e4uxc2dc-uxc81cuxb300uxb85c-stackframe}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} 전역변수 vs 지역변수}
+         \PY{n}{c} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{} 전역 변수}
+         \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n}{c} \PY{o}{=} \PY{l+m+mi}{20} \PY{c+c1}{\PYZsh{} 함수 내에 선언된 변수 : 지역 변수}
+             \PY{k}{return} \PY{n}{a} \PY{o}{+} \PY{n}{b}
+         \PY{n}{d} \PY{o}{=} \PY{n}{func}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} global에 c = 10 쌓임}
+         \PY{c+c1}{\PYZsh{} d = 를 쌓는 순간 함수라는 stackframe이 쌓임}
+         \PY{c+c1}{\PYZsh{} stackframe이 쌓이며,}
+         \PY{c+c1}{\PYZsh{}    \PYZhy{} 밑에서 부터 하나하나 쌓아올림}
+         \PY{c+c1}{\PYZsh{}    \PYZhy{} b = 20}
+         \PY{c+c1}{\PYZsh{}    \PYZhy{} a = 10}
+         \PY{c+c1}{\PYZsh{}    \PYZhy{} c = 20}
+         \PY{c+c1}{\PYZsh{} global의 c랑 stackframe의 c는 완전 다른 memory 공간에 존재함}
+         \PY{c+c1}{\PYZsh{} func()를 호출하는 순간 stackframe은 소멸됨.}
+         \PY{c+c1}{\PYZsh{} 때문에 메모리적인 관점에서 global c = 10은 전혀 바뀌지 않음}
+         \PY{c+c1}{\PYZsh{} func() stackframe이 쌓였다가 return함과 동시에 할당하고 memory에서 버림}
+\end{Verbatim}
+
+
+    http://pythontutor.com/
+
+    \begin{itemize}
+\tightlist
+\item
+  위의 사이트 참고, 내가 짠 코드가 어떻게 메모리 상에서 처리되는지
+  시각화 자료를 볼 수 있다.
+\end{itemize}
+
+    \subsubsection{stack overflow}\label{stack-overflow}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{10}
+             \PY{n}{func}\PY{p}{(}\PY{p}{)}
+         \PY{n}{func}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        RecursionError                            Traceback (most recent call last)
+
+        <ipython-input-33-7cebe143561c> in <module>()
+          2     a = 10
+          3     func()
+    ----> 4 func()
+    
+
+        <ipython-input-33-7cebe143561c> in func()
+          1 def func():
+          2     a = 10
+    ----> 3     func()
+          4 func()
+    
+
+        {\ldots} last 1 frames repeated, from the frame below {\ldots}
+    
+
+        <ipython-input-33-7cebe143561c> in func()
+          1 def func():
+          2     a = 10
+    ----> 3     func()
+          4 func()
+    
+
+        RecursionError: maximum recursion depth exceeded
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} func()호출하면 function frame을 하나 만듬}
+         \PY{c+c1}{\PYZsh{} 그 안에서 또 func()호출, 또 frame을 만듬}
+         \PY{c+c1}{\PYZsh{} 계속 반복}
+         \PY{c+c1}{\PYZsh{} 함수가 호출될 때 마다 stackframe이 하나씩 만듬}
+         \PY{c+c1}{\PYZsh{} 그러다가 stack 용량이 넘침}
+         \PY{c+c1}{\PYZsh{} 이것을 RecursionError을 일으킴}
+         \PY{c+c1}{\PYZsh{} 사실은 python은 stack을 직접적으로 사용할 수가 없다.}
+         
+         \PY{c+c1}{\PYZsh{} stack을 쌓다가 터진 것을 stack overflow 라고 함}
+         
+         \PY{c+c1}{\PYZsh{} http://pythontutor.com}
+         
+         \PY{n}{cnt}\PY{o}{=}\PY{l+m+mi}{0}
+         \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{m}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{k}{global} \PY{n}{cnt}
+             \PY{n}{cnt} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{if} \PY{n}{cnt}\PY{o}{\PYZgt{}}\PY{n}{m}\PY{p}{:}
+                 \PY{k}{return}
+             \PY{n}{a}\PY{o}{=}\PY{l+m+mi}{10}
+             \PY{n}{f}\PY{p}{(}\PY{p}{)}
+             
+         \PY{n}{f}\PY{p}{(}\PY{n}{m}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 이걸로 시험해보시길}
+\end{Verbatim}
+
+
+    \subsection{4. Closure}\label{closure}
+
+\begin{itemize}
+\tightlist
+\item
+  위의 firstclass function이 되어야 만들 수 있음
+\item
+  java script에서도 큰 역할을 하고 있음
+\item
+  why 쓸 수 밖에 없나?
+\item
+  js에는 class가 없음. 일부로 구현을 안함.
+\item
+  js 진영 : 우리도 OOP 쓰고 싶어요!
+\item
+  oop의 대용품으로 나온 것이 closure!
+\item
+  definition Clousure
+\item
+  함수 내부에 상태 정보를 가지고 있음
+\item
+  python에서는 closure를 쓰실 일이 거의 없음..
+\item
+  becuase OOP로 대부분의 것들이 해결 가능!
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} 지금부터 짜는 코드는 oop로 짜면 단번에 해결됨}
+         \PY{c+c1}{\PYZsh{} 함수 \PYZhy{}\PYZgt{} 계좌}
+         \PY{k}{def} \PY{n+nf}{account}\PY{p}{(}\PY{n}{name}\PY{p}{,} \PY{n}{balance}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{transaction}\PY{p}{(}\PY{n}{money}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{nonlocal} \PY{n}{balance}
+                 \PY{n}{balance} \PY{o}{+}\PY{o}{=} \PY{n}{money}
+                 \PY{k}{return} \PY{n}{name}\PY{p}{,} \PY{n}{balance}
+             \PY{k}{return} \PY{n}{transaction}
+         \PY{c+c1}{\PYZsh{} 이것이 closure}
+         
+         \PY{c+c1}{\PYZsh{} 내부 정보를 남겨두고 조회를 하는 것이 closure}
+         
+         \PY{n}{greg\PYZus{}acnt} \PY{o}{=} \PY{n}{account}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Greg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{50000000}\PY{p}{)}
+         \PY{n}{mark\PYZus{}acnt} \PY{o}{=} \PY{n}{account}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mark}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{3000000}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{type(greg\PYZus{}acnt) : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{greg\PYZus{}acnt}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{type(mark\PYZus{}acnt) : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{mark\PYZus{}acnt}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+type(greg\_acnt) : <class 'function'>
+type(mark\_acnt) : <class 'function'>
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{greg\PYZus{}acnt(5000000) : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{greg\PYZus{}acnt}\PY{p}{(}\PY{l+m+mi}{5000000}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mark\PYZus{}acnt(5000000) : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mark\PYZus{}acnt}\PY{p}{(}\PY{l+m+mi}{5000000}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+greg\_acnt(5000000) : ('Greg', 55000000)
+mark\_acnt(5000000) : ('Mark', 8000000)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{greg\PYZus{}acnt.\PYZus{}\PYZus{}name\PYZus{}\PYZus{} : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{greg\PYZus{}acnt}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mark\PYZus{}acnt.\PYZus{}\PYZus{}name\PYZus{}\PYZus{} : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mark\PYZus{}acnt}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} closure를 이해하고 decorator를 만들어보자!}
+         \PY{c+c1}{\PYZsh{} 그전에 이해도를 높이고!}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+greg\_acnt.\_\_name\_\_ : transaction
+mark\_acnt.\_\_name\_\_ : transaction
+
+    \end{Verbatim}
+
+    \subsection{5. Decorator}\label{decorator}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k}{class} \PY{n+nc}{A}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{a}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}a} \PY{o}{=} \PY{n}{a}
+         \PY{c+c1}{\PYZsh{}    @func2}
+         \PY{c+c1}{\PYZsh{}    @func1}
+             \PY{n+nd}{@property}
+             \PY{k}{def} \PY{n+nf}{a}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}a}
+             
+             \PY{n+nd}{@a}\PY{o}{.}\PY{n}{setter}
+             \PY{k}{def} \PY{n+nf}{a}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{new\PYZus{}a}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}a} \PY{o}{=} \PY{n}{new\PYZus{}a}
+                 
+         \PY{c+c1}{\PYZsh{} decorator는 어떤 함수에 기능을 추가할 때 사용함}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{a}\PY{o}{+}\PY{n}{b}
+         
+         \PY{n}{func}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} 3
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}
+         
+         \PY{n}{func}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} -1
+\end{Verbatim}
+            
+    \begin{itemize}
+\item
+  위의 함수를 덮어버림
+\item
+  이제부터 설명을 시작합니다\textasciitilde{}
+\end{itemize}
+
+    \begin{itemize}
+\tightlist
+\item
+  잠시 asterisk에 대해 설명
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} unpacking}
+         \PY{n}{li} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}
+         \PY{n}{a}\PY{p}{,} \PY{o}{*}\PY{n}{b} \PY{o}{=} \PY{n}{li}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1 [2, 3, 4, 5]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{args}\PY{p}{)} \PY{c+c1}{\PYZsh{} tuple로 묶임}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{kwargs}\PY{p}{)} \PY{c+c1}{\PYZsh{} dictionary로 묶임}
+             
+         \PY{c+c1}{\PYZsh{} 함수를 선언할 때의 argument의 의미는, 받겠다.}
+         \PY{c+c1}{\PYZsh{} 함수를 호출할 때의 이 의미는, 풀겠다.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{func}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1, 2, 3, \{'a': 1, 'b': 2\})
+\{\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{func}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{a}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,}\PY{n}{b}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1, 2, 3)
+\{'a': 4, 'b': 5\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{tu} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{dic} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{func}\PY{p}{(}\PY{n}{tu}\PY{p}{,} \PY{n}{dic}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+((1, 2, 3), \{'a': 4, 'b': 5\})
+\{\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{func}\PY{p}{(}\PY{o}{*}\PY{n}{tu}\PY{p}{,} \PY{o}{*}\PY{n}{dic}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1, 2, 3, 'a', 'b')
+\{\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{func}\PY{p}{(}\PY{o}{*}\PY{n}{tu}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{dic}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1, 2, 3)
+\{'a': 4, 'b': 5\}
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  하던 것을 마져 해 볼까요?
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{k}{def} \PY{n+nf}{outer}\PY{p}{(}\PY{n}{org\PYZus{}func}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{inner}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} 필요한 기능 추가}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{things to do}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{org\PYZus{}func}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)} \PY{c+c1}{\PYZsh{} 함수니까 당연히 callable 가능}
+             \PY{k}{return} \PY{n}{inner}
+         
+         \PY{k}{def} \PY{n+nf}{add}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{a}\PY{o}{+}\PY{n}{b}
+         
+         \PY{n}{add}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:} 3
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{add} \PY{o}{=} \PY{n}{outer}\PY{p}{(}\PY{n}{add}\PY{p}{)}
+         \PY{n}{add}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}57}]:} <function \_\_main\_\_.outer.<locals>.inner(*args, **kwargs)>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{add}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+things to do
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:} 3
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n+nd}{@outer}
+         \PY{k}{def} \PY{n+nf}{add}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{a}\PY{o}{+}\PY{n}{b}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{add}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+things to do
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}60}]:} 3
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} decorator는 기능을 추가하는 것, 붙이는 것}
+         
+         \PY{n}{add}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}
+         \PY{c+c1}{\PYZsh{} outer 함수의 결과값은 inner}
+         
+         \PY{c+c1}{\PYZsh{} 이거 맘에 안들어! outer 안에 있는 함수가 뭔지 알고?}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} 'inner'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{k+kn}{from} \PY{n+nn}{functools} \PY{k}{import} \PY{n}{wraps}
+         
+         \PY{k}{def} \PY{n+nf}{outer}\PY{p}{(}\PY{n}{org\PYZus{}func}\PY{p}{)}\PY{p}{:}
+             \PY{n+nd}{@wraps}\PY{p}{(}\PY{n}{org\PYZus{}func}\PY{p}{)}
+             \PY{k}{def} \PY{n+nf}{inner}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} 필요한 기능 추가}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{things to do}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{org\PYZus{}func}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)} \PY{c+c1}{\PYZsh{} 함수니까 당연히 callable 가능}
+             \PY{k}{return} \PY{n}{inner}
+         
+         \PY{n+nd}{@outer}
+         \PY{k}{def} \PY{n+nf}{add}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{a}\PY{o}{+}\PY{n}{b}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{add}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+things to do
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}63}]:} 3
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{add}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:} 'add'
+\end{Verbatim}
+            
+    \subsubsection{Benchmarker}\label{benchmarker}
+
+\begin{itemize}
+\tightlist
+\item
+  함수 실행 시간을 비교하여 성능 파악
+\item
+  함수 실행 시간을 알려주는 decorator를 만들 것임
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{k+kn}{from} \PY{n+nn}{functools} \PY{k}{import} \PY{n}{wraps}
+         \PY{k+kn}{import} \PY{n+nn}{time}
+         
+         \PY{k}{def} \PY{n+nf}{benchmarker}\PY{p}{(}\PY{n}{org\PYZus{}func}\PY{p}{)}\PY{p}{:}
+             \PY{n+nd}{@wraps}\PY{p}{(}\PY{n}{org\PYZus{}func}\PY{p}{)}
+             \PY{k}{def} \PY{n+nf}{inner}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}epoch 1911.\PYZti{} 시간을 정수형태 초단위로 반환}
+                 \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} 이러면 치명적인 오류 존재! return으로 함수가 끝나버림..}
+                 \PY{k}{return} \PY{n}{org\PYZus{}func}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+                 \PY{n}{elapsed} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{elapsed time of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{org\PYZus{}func}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{,} \PY{n}{elapsed}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{inner}
+         
+         \PY{k}{del} \PY{n}{benchmarker}
+         
+         \PY{k}{def} \PY{n+nf}{benchmarker}\PY{p}{(}\PY{n}{org\PYZus{}func}\PY{p}{)}\PY{p}{:}
+             \PY{n+nd}{@wraps}\PY{p}{(}\PY{n}{org\PYZus{}func}\PY{p}{)}
+             \PY{k}{def} \PY{n+nf}{inner}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{result} \PY{o}{=} \PY{n}{org\PYZus{}func}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+                 \PY{n}{elapsed} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{elapsed time of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{org\PYZus{}func}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{,} \PY{n}{elapsed}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{result}
+             \PY{k}{return} \PY{n}{inner}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n+nd}{@benchmarker}
+         \PY{k}{def} \PY{n+nf}{add}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n}{time}\PY{o}{.}\PY{n}{sleep}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)} \PY{c+c1}{\PYZsh{} 초 단위로 셈}
+             \PY{k}{return} \PY{n}{a}\PY{o}{+}\PY{n}{b}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{add}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+elapsed time of add : 3.000967025756836
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}67}]:} 3
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{c+c1}{\PYZsh{} ronud()함수를 사용, 깔끔하게 만들어보자.}
+         
+         \PY{k}{def} \PY{n+nf}{benchmarker}\PY{p}{(}\PY{n}{org\PYZus{}func}\PY{p}{)}\PY{p}{:}
+             \PY{n+nd}{@wraps}\PY{p}{(}\PY{n}{org\PYZus{}func}\PY{p}{)}
+             \PY{k}{def} \PY{n+nf}{inner}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}epoch 1911.\PYZti{} 시간을 정수형태 초단위로 반환}
+                 \PY{n}{result} \PY{o}{=} \PY{n}{org\PYZus{}func}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+                 \PY{n}{elapsed} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{elapsed time of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{org\PYZus{}func}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{elapsed}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{result}
+             \PY{k}{return} \PY{n}{inner}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n+nd}{@benchmarker}
+         \PY{k}{def} \PY{n+nf}{add}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n}{time}\PY{o}{.}\PY{n}{sleep}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)} \PY{c+c1}{\PYZsh{} 초 단위로 쉼}
+             \PY{k}{return} \PY{n}{a}\PY{o}{+}\PY{n}{b}
+         \PY{n}{add}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+elapsed time of add : 3.000112
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:} 3
+\end{Verbatim}
+            
+    \subsubsection{senior, architechter
+\textgreater{}\textgreater{}\textgreater{} decorator 작동 원리를 아는 것
+필요}\label{senior-architechter-decorator-uxc791uxb3d9-uxc6d0uxb9acuxb97c-uxc544uxb294-uxac83-uxd544uxc694}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
